@@ -5,7 +5,7 @@ using UnityEngine;
 public class Map : MonoBehaviour
 {
     private GameObject map;
-    public static bool CanMove = false;
+    public static bool CanMove = true;
     public static bool Win = false;
     public static bool Dead = false;
     // Start is called before the first frame update
