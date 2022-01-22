@@ -5,13 +5,13 @@ using UnityEngine;
 public class Map : MonoBehaviour
 {
     private GameObject map;
-    public static bool CanMove = true;
+    public static bool CanMove = false;
     public static bool Win = false;
     public static bool Dead = false;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        EventCenter.GetInstance().AddEventListener("BeginGame", BeginGame);
     }
     
     /// <summary>
@@ -21,7 +21,7 @@ public class Map : MonoBehaviour
     void InitWord(object key)
     {
         //加载地图
-        map = PoolMgr.GetInstance().GetObjAsyc("", new Vector3(0f, 0f, 0f), Quaternion.identity);
+        map = PoolMgr.GetInstance().GetObjAsyc("Prefabs/Level_0_to_Level_1", new Vector3(0f, 0f, 0f), Quaternion.identity);
     }
 
     /// <summary>
@@ -61,6 +61,6 @@ public class Map : MonoBehaviour
 
     public void DestoryListener()
     {
-
+        EventCenter.GetInstance().RomoveEventListener("BeginGame", BeginGame);
     }
 }

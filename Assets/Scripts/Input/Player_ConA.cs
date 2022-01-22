@@ -9,11 +9,13 @@ public class Player_ConA : MonoBehaviour
 
     [Header("people State")]
     public float speed = 5f;
-    public float Dragspeed = 1.5f;
+    public float Dragspeed = 1f;
     public float PushSpeed = 2.5f;
     public float Jumpforce = 60f;
+    public float Dam = 1f;
     private Rigidbody2D m_Rigidbody;
 
+    private float Health = 120f;
     private float pushTranstion = 0;
     private float pullTranstion = 0;
     //是否在地面
@@ -30,7 +32,6 @@ public class Player_ConA : MonoBehaviour
     {
         get {
             bool temp = input.GetLeftPullKey()&& IsOnGround;
-
             return temp;
         }
     }
@@ -62,6 +63,14 @@ public class Player_ConA : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Health>=0 )
+            Health -= Dam*Time.deltaTime;
+        else
+        {
+            Debug.Log(this.name + "寄！");
+            //死亡
+            Map.CanMove = false;
+        }
         if(Map.CanMove)
             Move();
     }

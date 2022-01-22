@@ -12,7 +12,10 @@ public class Player_ConB : MonoBehaviour
     public float Dragspeed = 1.5f;
     public float PushSpeed = 2.5f;
     public float Jumpforce = 60f;
+    public float Dam = 1f;
     private Rigidbody2D m_Rigidbody;
+    private float Health = 120f;
+
     //是否在地面
     private bool IsOnGround = true;
     //是否在触碰距离
@@ -37,6 +40,14 @@ public class Player_ConB : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Health >= 0)
+            Health -= Dam * Time.deltaTime;
+        else
+        {
+            Debug.Log(this.name + "寄！");
+            //死亡
+            Map.CanMove = false;
+        }
         if (Map.CanMove)
             Move();
     }
