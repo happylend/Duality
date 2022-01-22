@@ -69,6 +69,7 @@ public class Player_ConA : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpforce);
             //播放跳跃动画
+            animator.SetTrigger("Jump");
             //播放音效
         }
 
