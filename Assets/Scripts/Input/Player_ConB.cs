@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_ConA : MonoBehaviour
+public class Player_ConB : MonoBehaviour
 {
-   
+    // Start is called before the first frame update
     public Player_input input { get; set; }
 
     [Header("people State")]
@@ -37,7 +37,7 @@ public class Player_ConA : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Map.CanMove)
+        if (Map.CanMove)
             Move();
     }
 
@@ -48,12 +48,12 @@ public class Player_ConA : MonoBehaviour
     /// <param name="v"></param>
     private void Move()
     {
-        float h = input.Left;
+        float h = input.Right;
         //如果移动
-        if(h!=0&&!IsTouch)
+        if (h != 0 && !IsTouch)
         {
 
-            transform.Translate(transform.right*Time.deltaTime*h*speed);//Time.deltaTime 表示上一帧的时间
+            transform.Translate(transform.right * Time.deltaTime * h * speed);//Time.deltaTime 表示上一帧的时间
 
             //设置翻转
 
@@ -68,37 +68,37 @@ public class Player_ConA : MonoBehaviour
         }
 
         //跳跃
-        if (IsOnGround && input.GetKeyDown(KeyCode.W))
+        if (IsOnGround && input.GetKeyDown(KeyCode.Alpha1))
         {
             GetComponent<Rigidbody2D>().AddForce(Vector2.up * Jumpforce);
             //播放跳跃动画
         }
         //掉落动画
-        else if (!IsOnGround && h==0)
+        else if (!IsOnGround && h == 0)
         {
             animator.SetBool("Jump", true);
         }
         //推拉柱子
-        else if(IsTouch)
+        else if (IsTouch)
         {
-            
-            if (input.GetKey(KeyCode.J) && h < 0 &&!input.GetKey(KeyCode.W))
+
+            if (input.GetKey(KeyCode.J) && h < 0 && !input.GetKey(KeyCode.Alpha1))
             {
                 Pillar.transform.Translate(transform.right * Time.deltaTime * h * Dragspeed);
                 transform.Translate(transform.right * Time.deltaTime * h * Dragspeed);
             }
             //往左走
-            else if (h < 0 && IsOnGround && !input.GetKey(KeyCode.W))
+            else if (h < 0 && IsOnGround && !input.GetKey(KeyCode.Alpha1))
             {
                 transform.Translate(transform.right * Time.deltaTime * h * speed);
             }
             //推
-            if (h > 0 && IsOnGround && !input.GetKey(KeyCode.W))
+            if (h > 0 && IsOnGround && !input.GetKey(KeyCode.Alpha1))
             {
                 Pillar.transform.Translate(transform.right * Time.deltaTime * h * PushSpeed);
                 transform.Translate(transform.right * Time.deltaTime * h * PushSpeed);
             }
-                       
+
         }
 
     }
@@ -106,14 +106,14 @@ public class Player_ConA : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //如果在地面上
-        if(collision.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == "Ground")
         {
             //设置在地面上
             IsOnGround = true;
             //关闭跳跃动画
             animator.SetBool("Jump", false);
         }
-        if(collision.gameObject.tag == "Dead")
+        if (collision.gameObject.tag == "Dead")
         {
             //结束游戏
             GameOver();
@@ -138,10 +138,8 @@ public class Player_ConA : MonoBehaviour
             //设置在地面上
             IsOnGround = false;
         }
-       
+
     }
-
-
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Pillar")
