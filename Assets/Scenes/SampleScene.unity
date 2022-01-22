@@ -1044,9 +1044,12 @@ GameObject:
   - component: {fileID: 776879415}
   - component: {fileID: 776879414}
 <<<<<<< HEAD
+<<<<<<< HEAD
   - component: {fileID: 776879417}
   - component: {fileID: 776879416}
   - component: {fileID: 776879418}
+=======
+>>>>>>> parent of bd6404a (Merge branch 'main' of https://github.com/happylend/Duality)
 =======
 >>>>>>> parent of bd6404a (Merge branch 'main' of https://github.com/happylend/Duality)
   m_Layer: 5
@@ -1112,6 +1115,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 776879412}
   m_CullTransparentMesh: 0
+<<<<<<< HEAD
 <<<<<<< HEAD
 --- !u!114 &776879416
 MonoBehaviour:
@@ -1240,6 +1244,8 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+=======
+>>>>>>> parent of bd6404a (Merge branch 'main' of https://github.com/happylend/Duality)
 =======
 >>>>>>> parent of bd6404a (Merge branch 'main' of https://github.com/happylend/Duality)
 --- !u!1 &836706268
@@ -2413,9 +2419,12 @@ GameObject:
   - component: {fileID: 1991064555}
   - component: {fileID: 1991064554}
 <<<<<<< HEAD
+<<<<<<< HEAD
   - component: {fileID: 1991064557}
   - component: {fileID: 1991064556}
   - component: {fileID: 1991064558}
+=======
+>>>>>>> parent of bd6404a (Merge branch 'main' of https://github.com/happylend/Duality)
 =======
 >>>>>>> parent of bd6404a (Merge branch 'main' of https://github.com/happylend/Duality)
   m_Layer: 5
@@ -2481,6 +2490,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1991064552}
   m_CullTransparentMesh: 0
+<<<<<<< HEAD
 <<<<<<< HEAD
 --- !u!114 &1991064556
 MonoBehaviour:
@@ -2769,6 +2779,8 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2102680508}
   m_PrefabAsset: {fileID: 0}
+=======
+>>>>>>> parent of bd6404a (Merge branch 'main' of https://github.com/happylend/Duality)
 =======
 >>>>>>> parent of bd6404a (Merge branch 'main' of https://github.com/happylend/Duality)
 --- !u!1001 &3024891605766998614
