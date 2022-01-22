@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
-
+    private AudioSource source;
     public bool start;
     public bool exit;
 
@@ -21,6 +21,7 @@ public class UIController : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
     {
         i= 0;
         startCanvas = this.transform.parent;
+        source = GetComponent<AudioSource>();
     }
 
     //点击
@@ -29,6 +30,7 @@ public class UIController : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
         //开始
         if (start)
         {
+            source.Play();
             foreach (Transform child in startCanvas)
             {
                 Animation anim = child.GetComponent<Animation>();
