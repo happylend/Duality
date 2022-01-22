@@ -18,7 +18,7 @@ public class Map : MonoBehaviour
     /// 进入游戏
     /// </summary>
     /// <param name="key"></param>
-    void InitWord(object key)
+    public void InitWord(object key)
     {
         //加载地图
         map = PoolMgr.GetInstance().GetObjAsyc("", new Vector3(0f, 0f, 0f), Quaternion.identity);
@@ -28,7 +28,7 @@ public class Map : MonoBehaviour
     /// 开始游戏
     /// </summary>
     /// <param name="key"></param>
-    void BeginGame(object key)
+    public void BeginGame(object key)
     {
         //摄像机开始往上移动
 
@@ -42,7 +42,7 @@ public class Map : MonoBehaviour
     /// 重载游戏
     /// </summary>
     /// <param name="key"></param>
-    void Restart(int key)
+    public void Restart(int key)
     {
         CanMove = false;
         //清理缓存池
