@@ -14,8 +14,12 @@ public class UIController : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
 
     Transform startCanvas;
 
+    List<Transform> canvasObj = new List<Transform>();
+    int i = 0;
+
     void Start()
     {
+        i= 0;
         startCanvas = this.transform.parent;
     }
 
@@ -59,6 +63,17 @@ public class UIController : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
 
     void DestoryUI()
     {
-        startCanvas.gameObject.SetActive(false);
+
+        foreach (Transform child in startCanvas)
+        {
+            canvasObj.Add(child);
+        }
+
+        for (int i = 3; i > 0; i--)
+        {
+            Debug.Log(canvasObj[i - 1]);
+            canvasObj[i - 1].gameObject.SetActive(false);
+        }
+
     }
 }
