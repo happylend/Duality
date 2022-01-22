@@ -1300,7 +1300,7 @@ GameObject:
   - component: {fileID: 1585181810}
   m_Layer: 0
   m_Name: Init
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1522,6 +1522,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3024891605557158793, guid: bff28791275b7bb4c940d1218213433e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 3024891605557158838, guid: bff28791275b7bb4c940d1218213433e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1541,6 +1546,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3024891605920478039, guid: bff28791275b7bb4c940d1218213433e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 3024891606231589724, guid: bff28791275b7bb4c940d1218213433e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 3024891606231589725, guid: bff28791275b7bb4c940d1218213433e,
         type: 3}
@@ -1562,15 +1577,40 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 3.3
       objectReference: {fileID: 0}
+    - target: {fileID: 3024891606253467085, guid: bff28791275b7bb4c940d1218213433e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 3024891606747285154, guid: bff28791275b7bb4c940d1218213433e,
+        type: 3}
+      propertyPath: speed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3024891606747285154, guid: bff28791275b7bb4c940d1218213433e,
+        type: 3}
+      propertyPath: Dragspeed
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3024891606747285154, guid: bff28791275b7bb4c940d1218213433e,
+        type: 3}
+      propertyPath: Jumpforce
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 3024891606747285154, guid: bff28791275b7bb4c940d1218213433e,
+        type: 3}
+      propertyPath: PushSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3024891606747285156, guid: bff28791275b7bb4c940d1218213433e,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 3024891606747285156, guid: bff28791275b7bb4c940d1218213433e,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 3024891606747285156, guid: bff28791275b7bb4c940d1218213433e,
         type: 3}
@@ -1580,7 +1620,7 @@ PrefabInstance:
     - target: {fileID: 3024891606747285156, guid: bff28791275b7bb4c940d1218213433e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 16.37
+      value: 16.55
       objectReference: {fileID: 0}
     - target: {fileID: 3024891606785442578, guid: bff28791275b7bb4c940d1218213433e,
         type: 3}
@@ -1641,6 +1681,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Level_0_to_Level_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3024891607500772065, guid: bff28791275b7bb4c940d1218213433e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3024891607540595618, guid: bff28791275b7bb4c940d1218213433e,
         type: 3}
