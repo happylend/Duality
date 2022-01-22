@@ -6,7 +6,8 @@ public class Player_ConA : MonoBehaviour
 {
    
     public Player_input input { get; set; }
-
+    public static bool CamMove = false;
+    public static int CamCount = 0;
     [Header("people State")]
     public float speed = 5f;
     public float Dragspeed = 1f;
@@ -18,20 +19,28 @@ public class Player_ConA : MonoBehaviour
     private float Health = 120f;
     private float pushTranstion = 0;
     private float pullTranstion = 0;
+    private float Preheight;
+    private float height;
     //是否在地面
     private bool IsOnGround = true;
     //是否在触碰距离
     private bool IsTouch = false;
-
+    private bool CanCount;
     private GameObject Pillar;
+
+    //动画控制器
+    private Animator animator;
+
+
 
     /// <summary>
     /// 是否能拉
     /// </summary>
     private bool IsPull
     {
-        get {
-            bool temp = input.GetLeftPullKey()&& IsOnGround;
+        get
+        {
+            bool temp = input.GetLeftPullKey() && IsOnGround;
             return temp;
         }
     }
@@ -44,11 +53,10 @@ public class Player_ConA : MonoBehaviour
         {
             bool temp = input.GetLeftPushKey() && IsOnGround;
             return temp;
-                
+
         }
     }
-    //动画控制器
-    private Animator animator;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -63,7 +71,15 @@ public class Player_ConA : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Health>=0 )
+        height = transform.position.y;
+
+        if (height - Preheight > 3.5f && !CamMove)
+        {
+            CamMove = true;
+            CamCount++;
+            Preheight = height;
+        }
+        if (Health>=0 )
             Health -= Dam*Time.deltaTime;
         else
         {
@@ -83,6 +99,7 @@ public class Player_ConA : MonoBehaviour
     private void Move()
     {
         float h = input.Left;
+        //Debug.Log("左边的h是" + h);
         //如果移动
         if(h!=0&&!IsTouch)
         {

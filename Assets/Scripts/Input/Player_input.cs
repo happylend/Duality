@@ -25,13 +25,25 @@ public class Player_input
     {
         return Input.GetKey(key);
     }
+    
     public bool GetLeftPullKey()
     {
         return GetKey(KeyCode.J)&& Left<0 && !GetKey(KeyCode.W);
     }
+
     public bool GetLeftPushKey()
     {
          return Left > 0 && !GetKey(KeyCode.W);
+    }
+
+    public bool GetRightPullKey()
+    {
+        return GetKey(KeyCode.Keypad1) && Right > 0 && !GetKey(KeyCode.UpArrow);
+    }
+
+    public bool GetRightPushKey()
+    {
+        return Right < 0 && !GetKey(KeyCode.UpArrow);
     }
 
 

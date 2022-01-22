@@ -6,7 +6,7 @@ public class Player_ConB : MonoBehaviour
 {
     // Start is called before the first frame update
     public Player_input input { get; set; }
-
+    public static bool CamMove = false;
     [Header("people State")]
     public float speed = 5f;
     public float Dragspeed = 1.5f;
@@ -15,17 +15,45 @@ public class Player_ConB : MonoBehaviour
     public float Dam = 1f;
     private Rigidbody2D m_Rigidbody;
     private float Health = 120f;
-
+    private float pushTranstion = 0;
+    private float pullTranstion = 0;
     //是否在地面
     private bool IsOnGround = true;
     //是否在触碰距离
     private bool IsTouch = false;
-
     private GameObject Pillar;
-
 
     //动画控制器
     private Animator animator;
+
+    private float Preheight;
+    private float height;
+    /// <summary>
+    /// 是否能拉
+    /// </summary>
+    private bool IsPull
+    {
+        get
+        {
+            bool temp = input.GetRightPullKey() && IsOnGround;
+            return temp;
+        }
+    }
+    /// <summary>
+    /// 是否能推
+    /// </summary>
+    private bool IsPush
+    {
+        get
+        {
+            bool temp = input.GetRightPushKey() && IsOnGround;
+            return temp;
+
+        }
+    }
+
+
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -35,11 +63,21 @@ public class Player_ConB : MonoBehaviour
     void Start()
     {
         input = new Player_input();
+        Preheight = transform.position.y;
     }
 
     // Update is called once per frame
     void Update()
     {
+        height = transform.position.y;
+        
+        if(height-Preheight>3.5f&& !CamMove)
+        {
+            CamMove = true;         
+            Preheight = height;          
+        }
+
+
         if (Health >= 0)
             Health -= Dam * Time.deltaTime;
         else
@@ -67,19 +105,19 @@ public class Player_ConB : MonoBehaviour
             transform.Translate(transform.right * Time.deltaTime * h * speed);//Time.deltaTime 表示上一帧的时间
 
             //设置翻转
-
+            //Debug.Log("h是" + h);
             //播放跑步动画
-            animator.SetFloat("Floor", h);
+            animator.SetFloat("FloorB", h);
         }
         //如果不移动
         else
         {
             //退出跑步
-            animator.SetFloat("Floor", 0);
+            animator.SetFloat("FloorB", 0);
         }
 
         //跳跃
-        if (IsOnGround && input.GetKeyDown(KeyCode.Alpha1))
+        if (IsOnGround && input.GetKeyDown(KeyCode.UpArrow))
         {
             GetComponent<Rigidbody2D>().AddForce(Vector2.up * Jumpforce);
             //播放跳跃动画
@@ -87,29 +125,47 @@ public class Player_ConB : MonoBehaviour
         //掉落动画
         else if (!IsOnGround && h == 0)
         {
-            animator.SetBool("Jump", true);
+            animator.SetBool("Fall", true);
         }
         //推拉柱子
         else if (IsTouch)
         {
+            //Debug.Log(h);
+            //拉
+            if (h > 0)
+            {
+                if (IsPull)
+                {
+                    Pillar.transform.Translate(transform.right * Time.deltaTime * h * Dragspeed);
+                    transform.Translate(transform.right * Time.deltaTime * h * Dragspeed);
+                    pullTranstion = 1;
+                    animator.SetFloat("FloorB", h + pullTranstion);
 
-            if (input.GetKey(KeyCode.J) && h < 0 && !input.GetKey(KeyCode.Alpha1))
-            {
-                Pillar.transform.Translate(transform.right * Time.deltaTime * h * Dragspeed);
-                transform.Translate(transform.right * Time.deltaTime * h * Dragspeed);
+                }
+                else if (!IsPull)
+                {
+                    transform.Translate(transform.right * Time.deltaTime * h * speed);
+                    animator.SetFloat("FloorB", h);
+                    pushTranstion = 0;
+                }
             }
-            //往左走
-            else if (h < 0 && IsOnGround && !input.GetKey(KeyCode.Alpha1))
+            if (h < 0)
             {
-                transform.Translate(transform.right * Time.deltaTime * h * speed);
-            }
-            //推
-            if (h > 0 && IsOnGround && !input.GetKey(KeyCode.Alpha1))
-            {
-                Pillar.transform.Translate(transform.right * Time.deltaTime * h * PushSpeed);
-                transform.Translate(transform.right * Time.deltaTime * h * PushSpeed);
-            }
+                if (IsPush)
+                {
+                    pushTranstion = -1f;
+                    Pillar.transform.Translate(transform.right * Time.deltaTime * h * PushSpeed);
+                    transform.Translate(transform.right * Time.deltaTime * h * PushSpeed);
+                    animator.SetFloat("FloorB", h + pushTranstion);
 
+                }
+                else if (!IsPush)
+                {
+                    pushTranstion = 0;
+                    transform.Translate(transform.right * Time.deltaTime * h * speed);
+                    animator.SetFloat("FloorB", h);
+                }
+            }
         }
 
     }
@@ -122,7 +178,7 @@ public class Player_ConB : MonoBehaviour
             //设置在地面上
             IsOnGround = true;
             //关闭跳跃动画
-            animator.SetBool("Jump", false);
+            animator.SetBool("Fall", false);
         }
         if (collision.gameObject.tag == "Dead")
         {
