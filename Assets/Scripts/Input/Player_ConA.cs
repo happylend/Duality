@@ -76,7 +76,7 @@ public class Player_ConA : MonoBehaviour
         //掉落动画
         else if (!IsOnGround && h==0)
         {
-            animator.SetBool("Jump", true);
+            animator.SetBool("Fall", true);
         }
         //推拉柱子
         else if(IsTouch)
@@ -84,6 +84,7 @@ public class Player_ConA : MonoBehaviour
             
             if (input.GetKey(KeyCode.J) && h < 0 &&!input.GetKey(KeyCode.W))
             {
+                animator.SetBool("Pull", true);
                 Pillar.transform.Translate(transform.right * Time.deltaTime * h * Dragspeed);
                 transform.Translate(transform.right * Time.deltaTime * h * Dragspeed);
             }
@@ -91,14 +92,24 @@ public class Player_ConA : MonoBehaviour
             else if (h < 0 && IsOnGround && !input.GetKey(KeyCode.W))
             {
                 transform.Translate(transform.right * Time.deltaTime * h * speed);
+                animator.SetBool("Pull", false);
+            }
+            else
+            {
+                animator.SetBool("Pull", false);
             }
             //推
             if (h > 0 && IsOnGround && !input.GetKey(KeyCode.W))
             {
+                animator.SetBool("Push", true);
                 Pillar.transform.Translate(transform.right * Time.deltaTime * h * PushSpeed);
                 transform.Translate(transform.right * Time.deltaTime * h * PushSpeed);
             }
-                       
+            else
+            {
+                animator.SetBool("Push", false);
+            }
+
         }
 
     }
@@ -111,7 +122,7 @@ public class Player_ConA : MonoBehaviour
             //设置在地面上
             IsOnGround = true;
             //关闭跳跃动画
-            animator.SetBool("Jump", false);
+            animator.SetBool("Fall", false);
         }
         if(collision.gameObject.tag == "Dead")
         {
