@@ -13,6 +13,7 @@ public class Player_ConA : MonoBehaviour
     //是否在地面
     private bool IsOnGround = true;
 
+    //动画控制器
     private Animator animator;
     // Start is called before the first frame update
     private void Awake()
@@ -45,21 +46,22 @@ public class Player_ConA : MonoBehaviour
         {
 
             transform.Translate(transform.right*Time.deltaTime*h*speed);//Time.deltaTime 表示上一帧的时间
-            
+
             //设置翻转
-            
+
             /*
             if (h > 0) GetComponent<SpriteRenderer>().flipX = false;
             else GetComponent<SpriteRenderer>().flipX = true;
             */
 
             //播放跑步动画
-
+            animator.SetFloat("Floor", h);
         }
         //如果不移动
         else
         {
             //退出跑步
+            animator.SetFloat("Floor", 0);
         }
 
         //跳跃
