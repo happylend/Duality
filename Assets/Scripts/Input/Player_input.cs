@@ -25,6 +25,15 @@ public class Player_input
     {
         return Input.GetKey(key);
     }
-    // Start is called before the first frame update
+    public bool GetLeftPullKey()
+    {
+        return GetKey(KeyCode.J)&& Left<0 && !GetKey(KeyCode.W);
+    }
+    public bool GetLeftPushKey()
+    {
+         return Left > 0 && !GetKey(KeyCode.W);
+    }
+
+
 
 }

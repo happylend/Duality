@@ -13,6 +13,9 @@ public class Player_ConA : MonoBehaviour
     public float PushSpeed = 2.5f;
     public float Jumpforce = 60f;
     private Rigidbody2D m_Rigidbody;
+
+    private float pushTranstion = 0;
+    private float pullTranstion = 0;
     //是否在地面
     private bool IsOnGround = true;
     //是否在触碰距离
@@ -20,7 +23,29 @@ public class Player_ConA : MonoBehaviour
 
     private GameObject Pillar;
 
+    /// <summary>
+    /// 是否能拉
+    /// </summary>
+    private bool IsPull
+    {
+        get {
+            bool temp = input.GetLeftPullKey()&& IsOnGround;
 
+            return temp;
+        }
+    }
+    /// <summary>
+    /// 是否能推
+    /// </summary>
+    private bool IsPush
+    {
+        get
+        {
+            bool temp = input.GetLeftPushKey() && IsOnGround;
+            return temp;
+                
+        }
+    }
     //动画控制器
     private Animator animator;
     // Start is called before the first frame update
@@ -81,35 +106,41 @@ public class Player_ConA : MonoBehaviour
         //推拉柱子
         else if(IsTouch)
         {
-            
-            if (input.GetKey(KeyCode.J) && h < 0 &&!input.GetKey(KeyCode.W))
+            //拉
+            if(h<0)
             {
-                animator.SetBool("Pull", true);
-                Pillar.transform.Translate(transform.right * Time.deltaTime * h * Dragspeed);
-                transform.Translate(transform.right * Time.deltaTime * h * Dragspeed);
+                if (IsPull)
+                {
+                    Pillar.transform.Translate(transform.right * Time.deltaTime * h * Dragspeed);
+                    transform.Translate(transform.right * Time.deltaTime * h * Dragspeed);                    
+                    pullTranstion = -1;
+                    animator.SetFloat("Floor", h+pullTranstion);
+        
+                } 
+                else if(!IsPull)
+                {
+                    transform.Translate(transform.right * Time.deltaTime * h * speed);
+                    animator.SetFloat("Floor", h);
+                    pushTranstion = 0;
+                }              
             }
-            //往左走
-            else if (h < 0 && IsOnGround && !input.GetKey(KeyCode.W))
+            if(h>0)
             {
-                transform.Translate(transform.right * Time.deltaTime * h * speed);
-                animator.SetBool("Pull", false);
-            }
-            else
-            {
-                animator.SetBool("Pull", false);
-            }
-            //推
-            if (h > 0 && IsOnGround && !input.GetKey(KeyCode.W))
-            {
-                animator.SetBool("Push", true);
-                Pillar.transform.Translate(transform.right * Time.deltaTime * h * PushSpeed);
-                transform.Translate(transform.right * Time.deltaTime * h * PushSpeed);
-            }
-            else
-            {
-                animator.SetBool("Push", false);
-            }
+                if (IsPush)
+                {
+                    pushTranstion = 1f;
+                    Pillar.transform.Translate(transform.right * Time.deltaTime * h * PushSpeed);
+                    transform.Translate(transform.right * Time.deltaTime * h * PushSpeed);
+                    animator.SetFloat("Floor", h + pushTranstion);
 
+                }
+                else if (!IsPush)
+                { 
+                    pushTranstion = 0;
+                    transform.Translate(transform.right * Time.deltaTime * h * speed);
+                    animator.SetFloat("Floor", h);
+                }                
+            }
         }
 
     }
