@@ -30,7 +30,7 @@ public class UIController : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
                 Animation anim = child.GetComponent<Animation>();
                 anim.Play();
             }
-
+            EventCenter.GetInstance().EventTrigger("BeginGame", 0);
         }
 
         //退出
