@@ -73,12 +73,12 @@ public class Player_ConA : MonoBehaviour
             GetComponent<Rigidbody2D>().AddForce(Vector2.up * Jumpforce);
             //播放跳跃动画
         }
-        //下落
+        //掉落动画
         else if (!IsOnGround && h==0)
         {
             animator.SetBool("Jump", true);
         }
-        //推拉
+        //推拉柱子
         else if(IsTouch)
         {
             
@@ -108,10 +108,15 @@ public class Player_ConA : MonoBehaviour
         //如果在地面上
         if(collision.gameObject.tag == "Ground")
         {
-            //关闭跳跃动画
-            animator.SetBool("Jump", false);
             //设置在地面上
             IsOnGround = true;
+            //关闭跳跃动画
+            animator.SetBool("Jump", false);
+        }
+        if(collision.gameObject.tag == "Dead")
+        {
+            //结束游戏
+            GameOver();
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -129,7 +134,6 @@ public class Player_ConA : MonoBehaviour
         //离开地面
         if (collision.gameObject.tag == "Ground")
         {
-            //开启跳跃动画
 
             //设置在地面上
             IsOnGround = false;
