@@ -4,14 +4,22 @@ using UnityEngine;
 
 public class Player_ConA : MonoBehaviour
 {
+   
     public Player_input input { get; set; }
 
+    [Header("people State")]
     public float speed = 5f;
-
-    public float jumpforce = 60f;
+    public float Dragspeed = 1.5f;
+    public float PushSpeed = 2.5f;
+    public float Jumpforce = 60f;
     private Rigidbody2D m_Rigidbody;
     //是否在地面
     private bool IsOnGround = true;
+    //是否在触碰距离
+    private bool IsTouch = false;
+
+    private GameObject Pillar;
+
 
     //动画控制器
     private Animator animator;
@@ -42,17 +50,12 @@ public class Player_ConA : MonoBehaviour
     {
         float h = input.Left;
         //如果移动
-        if(h!=0)
+        if(h!=0&&!IsTouch)
         {
 
             transform.Translate(transform.right*Time.deltaTime*h*speed);//Time.deltaTime 表示上一帧的时间
 
             //设置翻转
-
-            /*
-            if (h > 0) GetComponent<SpriteRenderer>().flipX = false;
-            else GetComponent<SpriteRenderer>().flipX = true;
-            */
 
             //播放跑步动画
             animator.SetFloat("Floor", h);
@@ -65,14 +68,38 @@ public class Player_ConA : MonoBehaviour
         }
 
         //跳跃
-        if(IsOnGround&&input.GetKeyDown(KeyCode.W))
+        if (IsOnGround && input.GetKeyDown(KeyCode.W))
         {
-            GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpforce);
+            GetComponent<Rigidbody2D>().AddForce(Vector2.up * Jumpforce);
             //播放跳跃动画
-            animator.SetTrigger("Jump");
-            //播放音效
         }
-
+        //下落
+        else if (!IsOnGround && h==0)
+        {
+            animator.SetBool("Jump", true);
+        }
+        //推拉
+        else if(IsTouch)
+        {
+            
+            if (input.GetKey(KeyCode.J) && h < 0 &&!input.GetKey(KeyCode.W))
+            {
+                Pillar.transform.Translate(transform.right * Time.deltaTime * h * Dragspeed);
+                transform.Translate(transform.right * Time.deltaTime * h * Dragspeed);
+            }
+            //往左走
+            else if (h < 0 && IsOnGround && !input.GetKey(KeyCode.W))
+            {
+                transform.Translate(transform.right * Time.deltaTime * h * speed);
+            }
+            //推
+            if (h > 0 && IsOnGround && !input.GetKey(KeyCode.W))
+            {
+                Pillar.transform.Translate(transform.right * Time.deltaTime * h * PushSpeed);
+                transform.Translate(transform.right * Time.deltaTime * h * PushSpeed);
+            }
+                       
+        }
 
     }
 
@@ -82,9 +109,18 @@ public class Player_ConA : MonoBehaviour
         if(collision.gameObject.tag == "Ground")
         {
             //关闭跳跃动画
-
+            animator.SetBool("Jump", false);
             //设置在地面上
             IsOnGround = true;
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Pillar" && IsOnGround)
+        {
+            //设置为可以推拉
+            IsTouch = true;
+            Pillar = collision.transform.parent.gameObject;
         }
     }
 
@@ -98,6 +134,17 @@ public class Player_ConA : MonoBehaviour
             //设置在地面上
             IsOnGround = false;
         }
+       
+    }
+
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Pillar")
+        {
+            //设置为不可以推拉
+            IsTouch = false;
+        }
     }
     /// <summary>
     /// 人物死亡
@@ -108,7 +155,6 @@ public class Player_ConA : MonoBehaviour
         //播放死亡音效
         //设置几秒后游戏结束
         Invoke("GameOver", 3.5f);
-
     }
 
     private void GameOver()
