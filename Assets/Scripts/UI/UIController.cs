@@ -14,6 +14,7 @@ public class UIController : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
 
     Transform startCanvas;
 
+
     List<Transform> canvasObj = new List<Transform>();
     int i = 0;
 
@@ -31,12 +32,20 @@ public class UIController : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
         //开始
         if (start)
         {
-            source.Play();
+
+            if (source)
+            {
+                source.Play();
+            }
             Time.timeScale = 1;
             foreach (Transform child in startCanvas)
             {
                 Animation anim = child.GetComponent<Animation>();
-                anim.Play();
+                if (anim)
+                {
+                    anim.Play();
+                }
+
             }
             EventCenter.GetInstance().EventTrigger("BeginGame", 0);
         }
@@ -50,10 +59,20 @@ public class UIController : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
 
     }
 
+    void Update()
+    {
+        
+
+    }
+
     //进入
     public void OnPointerEnter(PointerEventData eventData)
     {
-        this.GetComponent<Image>().color = Color.red;
+        if (start || exit)
+        {
+            this.GetComponent<Image>().color = Color.red;
+        }
+
 
     }
 
@@ -61,13 +80,15 @@ public class UIController : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
     //离开
     public void OnPointerExit(PointerEventData eventData)
     {
-        this.GetComponent<Image>().color = Color.white;
-
+        if (start || exit)
+        {
+            this.GetComponent<Image>().color = Color.white;
+        }
     }
 
     void DestoryUI()
     {
-
+        MoveCam.startMove = true;
         foreach (Transform child in startCanvas)
         {
             canvasObj.Add(child);
@@ -78,6 +99,7 @@ public class UIController : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
             Debug.Log(canvasObj[i - 1]);
             canvasObj[i - 1].gameObject.SetActive(false);
         }
+
 
     }
 }

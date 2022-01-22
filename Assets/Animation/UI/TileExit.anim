@@ -274,12 +274,4 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events:
-  - time: 1
-    functionName: DestoryUI
-    data: 
-    objectReferenceParameter: {fileID: 11500000, guid: ab8d13bc50a7fbb47aa83d8b336e4380,
-      type: 3}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
+  m_Events: []

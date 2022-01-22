@@ -23,5 +23,7 @@ public class TimeTest : MonoBehaviour
         minute = (int)(spendTime - hour * 3600) / 60;
         second = (int)(spendTime - hour * 3600 - minute * 60);
         timeShowText.text = string.Format("{0:D2}:{1:D2}:{2:D2}", hour, minute, second);
+
+
     }
 }
