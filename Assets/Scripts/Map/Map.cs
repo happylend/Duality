@@ -34,7 +34,7 @@ public class Map : MonoBehaviour
 
         //缓存几秒
         //人物可以移动
-        CanMove = true;
+        Map.CanMove = true;
 
     }
 
