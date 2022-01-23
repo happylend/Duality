@@ -7,7 +7,7 @@ public class Player_ConA : MonoBehaviour
    
     public Player_input input { get; set; }
     public static bool CamMove = false;
-    public static int CamCount = 0;
+    public static int CamCount;
     public static float height, Preheight;
     [Header("people State")]
     public float speed = 5f;
@@ -57,6 +57,7 @@ public class Player_ConA : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
+        CamCount = 0;
         m_Rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
