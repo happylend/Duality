@@ -233,6 +233,9 @@ public class Player_ConA : MonoBehaviour
 
     private void GameOver()
     {
+        Debug.Log("重启");
+
         //重新加载当前场景
+        EventCenter.GetInstance().EventTrigger("Restart", 1);
     }
 }

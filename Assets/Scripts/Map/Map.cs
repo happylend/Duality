@@ -8,10 +8,13 @@ public class Map : MonoBehaviour
     public static bool CanMove = true;
     public static bool Win = false;
     public static bool Dead = false;
+    public GameObject[] canvas;
     // Start is called before the first frame update
     void Awake()
     {
-        EventCenter.GetInstance().AddEventListener("BeginGame", BeginGame);
+        //EventCenter.GetInstance().AddEventListener("BeginGame", BeginGame);
+        EventCenter.GetInstance().AddEventListener("Restart", Restart);
+        InitWord(1);
     }
     
     /// <summary>
@@ -42,7 +45,7 @@ public class Map : MonoBehaviour
     /// 重载游戏
     /// </summary>
     /// <param name="key"></param>
-    public void Restart(int key)
+    public void Restart(object key)
     {
         CanMove = false;
         //清理缓存池
@@ -52,11 +55,16 @@ public class Map : MonoBehaviour
         //重置胜利
         Win = false;
         //重新加载地图
-        map = PoolMgr.GetInstance().GetObjAsyc("", new Vector3(0f, 0f, 0f), Quaternion.identity);
-        //摄像机移动
+        map = PoolMgr.GetInstance().GetObjAsyc("Prefabs/Level_0_to_Level_1", new Vector3(0f, 0f, 0f), Quaternion.identity);
+   
+       
+        foreach (var item in canvas)
+        {
+            item.SetActive(true);
+        }
 
-        //人物可以移动
-        CanMove = true;
+
+        //MoveCam.startMove = true;
     }
 
     public void DestoryListener()

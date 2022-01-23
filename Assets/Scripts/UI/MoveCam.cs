@@ -6,11 +6,11 @@ public class MoveCam : MonoBehaviour
 {
     public static bool startMove = false;
     public static bool CamMove = false;
-    private GameObject Cam;
+    public GameObject Cam;
     // Start is called before the first frame update
     void Start()
     {
-        Cam = GameObject.Find("Main Camera");
+        Cam = this.gameObject;
     }
 
     // Update is called once per frame
@@ -24,6 +24,8 @@ public class MoveCam : MonoBehaviour
             {
                 startMove = false;
                 CamMove = true;
+                //人物可以移动
+                Map.CanMove = true;
             }
         }
         if(CamMove)
