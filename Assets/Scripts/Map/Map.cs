@@ -47,6 +47,7 @@ public class Map : MonoBehaviour
     /// <param name="key"></param>
     public void Restart(object key)
     {
+        MusicMgr.GetInstance().StopBKMusic();
         CanMove = false;
         //清理缓存池
         PoolMgr.GetInstance().Clear();
@@ -63,7 +64,7 @@ public class Map : MonoBehaviour
             item.SetActive(true);
         }
 
-
+        MusicMgr.GetInstance().PlayBkMusic("1075815-pinofas-Return to Old Town");
         //MoveCam.startMove = true;
     }
 
