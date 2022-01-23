@@ -6,7 +6,7 @@ public class MoveCam : MonoBehaviour
 {
     public static bool startMove = false;
     public static bool CamMove = false;
-    public float speed = 2.5f;
+    private float speed = 3f;
     public GameObject Cam;
     public Transform ParentTran;
     public Transform[] players;

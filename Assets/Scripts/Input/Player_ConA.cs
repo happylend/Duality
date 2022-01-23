@@ -73,11 +73,11 @@ public class Player_ConA : MonoBehaviour
     
         
 
-        if (height - Preheight > 2.5f && !CamMove)
+        if (height - Preheight > 3 && !CamMove)
         {
             CamMove = true;
             CamCount++;
-            Preheight += 2.5f;
+            Preheight += 3;
             Debug.Log(Preheight);
         }
      

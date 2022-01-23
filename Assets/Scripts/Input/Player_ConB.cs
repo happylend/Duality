@@ -73,10 +73,10 @@ public class Player_ConB : MonoBehaviour
        
        height = transform.position.y;
         
-       if(height-Preheight>2.5f&& !CamMove)
+       if(height-Preheight>3&& !CamMove)
        {
            CamMove = true;         
-           Preheight += 2.5f;          
+           Preheight += 3f;          
        }
 
        
