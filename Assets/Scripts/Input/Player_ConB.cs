@@ -13,7 +13,7 @@ public class Player_ConB : MonoBehaviour
     public float Dragspeed = 1.5f;
     public float PushSpeed = 2.5f;
     public float Jumpforce = 60f;
-    public float Dam = 1f;
+    public float Dam = 0f;
     private Rigidbody2D m_Rigidbody;
     private float Health = 120f;
     private float pushTranstion = 0;

@@ -56,7 +56,7 @@ public class Map : MonoBehaviour
         //重置胜利
         Win = false;
         //重新加载地图
-        map = PoolMgr.GetInstance().GetObjAsyc("Prefabs/Level_0_to_Level_1", new Vector3(0f, 0f, 0f), Quaternion.identity);
+        map = PoolMgr.GetInstance().GetObjAsyc("Prefabs/Level_1", new Vector3(0f, 0f, 0f), Quaternion.identity);
    
        
         foreach (var item in canvas)
