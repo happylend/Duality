@@ -37,10 +37,13 @@ public class MoveCam : MonoBehaviour
             {
                 Cam.transform.position = Vector3.MoveTowards(Cam.transform.position, new Vector3(0, 19 + speed * Player_ConA.CamCount, -10), 8 * Time.fixedDeltaTime);
                 if(Cam.transform.position == new Vector3(0, 19+speed*Player_ConA.CamCount, -10))
-                {
-                    Debug.Log("结束镜头移动");
+                {            
                     Player_ConA.CamMove = Player_ConB.CamMove = false;
                 }
+                else if(Cam.transform.position == new Vector3(0, 75.2f, -10)|| Cam.transform.position == new Vector3(0, 83f, -10)||
+                    Cam.transform.position == new Vector3(0, 91.5f, -10)) Player_ConA.CamMove = Player_ConB.CamMove = false;
+
+                
             }
             
             

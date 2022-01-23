@@ -1,2 +1,3 @@
 init(0,0,-10)
-Speed 2 DragSpeed 0.5 PushSpeed 1 JumpSpeed 500
+Speed 2 DragSpeed 0.5 PushSpeed 1 JumpSpeed 500 
+y =-0.08 75.2 83  91.5
