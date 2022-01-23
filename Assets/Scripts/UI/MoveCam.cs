@@ -6,7 +6,10 @@ public class MoveCam : MonoBehaviour
 {
     public static bool startMove = false;
     public static bool CamMove = false;
+    public float speed = 2.5f;
     public GameObject Cam;
+    public Transform ParentTran;
+    public Transform[] players;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,16 +32,22 @@ public class MoveCam : MonoBehaviour
             }
         }
         if(CamMove)
-        {
+        {   
             if(Player_ConA.CamMove && Player_ConB.CamMove)
             {
-                Cam.transform.position = Vector3.MoveTowards(Cam.transform.position, new Vector3(0, 19 + 3.5f * Player_ConA.CamCount, -10), 8 * Time.fixedDeltaTime);
-                if(Cam.transform.position == new Vector3(0, 19+3.5f*Player_ConA.CamCount, -10))
+                Cam.transform.position = Vector3.MoveTowards(Cam.transform.position, new Vector3(0, 19 + speed * Player_ConA.CamCount, -10), 8 * Time.fixedDeltaTime);
+                if(Cam.transform.position == new Vector3(0, 19+speed*Player_ConA.CamCount, -10))
                 {
                     Debug.Log("结束镜头移动");
                     Player_ConA.CamMove = Player_ConB.CamMove = false;
                 }
             }
+            
+            
+            //人物移动
+
+
+
         }
 
     }

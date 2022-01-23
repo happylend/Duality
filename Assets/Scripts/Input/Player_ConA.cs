@@ -8,6 +8,7 @@ public class Player_ConA : MonoBehaviour
     public Player_input input { get; set; }
     public static bool CamMove = false;
     public static int CamCount = 0;
+    public static float height, Preheight;
     [Header("people State")]
     public float speed = 5f;
     public float Dragspeed = 1f;
@@ -19,8 +20,7 @@ public class Player_ConA : MonoBehaviour
     private float Health = 120f;
     private float pushTranstion = 0;
     private float pullTranstion = 0;
-    private float Preheight;
-    private float height;
+    
     //是否在地面
     private bool IsOnGround = true;
     //是否在触碰距离
@@ -30,9 +30,6 @@ public class Player_ConA : MonoBehaviour
 
     //动画控制器
     private Animator animator;
-
-
-
     /// <summary>
     /// 是否能拉
     /// </summary>
@@ -73,14 +70,17 @@ public class Player_ConA : MonoBehaviour
     void Update()
     {
         height = transform.position.y;
+    
+        
 
-        if (height - Preheight > 3.5f && !CamMove)
+        if (height - Preheight > 2.5f && !CamMove)
         {
             CamMove = true;
             CamCount++;
-            Preheight += 3.5f;
+            Preheight += 2.5f;
             Debug.Log(Preheight);
         }
+     
         if (Health>=0 )
             Health -= Dam*Time.deltaTime;
         else

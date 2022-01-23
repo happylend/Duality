@@ -7,6 +7,7 @@ public class Player_ConB : MonoBehaviour
     // Start is called before the first frame update
     public Player_input input { get; set; }
     public static bool CamMove = false;
+    public static float height,Preheight;
     [Header("people State")]
     public float speed = 5f;
     public float Dragspeed = 1.5f;
@@ -26,8 +27,8 @@ public class Player_ConB : MonoBehaviour
     //动画控制器
     private Animator animator;
 
-    private float Preheight;
-    private float height;
+    //private float Preheight;
+   
     /// <summary>
     /// 是否能拉
     /// </summary>
@@ -69,15 +70,16 @@ public class Player_ConB : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        height = transform.position.y;
+       
+       height = transform.position.y;
         
-        if(height-Preheight>3.5f&& !CamMove)
-        {
-            CamMove = true;         
-            Preheight +=3.5f;          
-        }
+       if(height-Preheight>2.5f&& !CamMove)
+       {
+           CamMove = true;         
+           Preheight += 2.5f;          
+       }
 
-
+       
         if (Health >= 0)
             Health -= Dam * Time.deltaTime;
         else

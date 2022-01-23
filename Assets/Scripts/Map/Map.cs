@@ -24,7 +24,7 @@ public class Map : MonoBehaviour
     public void InitWord(object key)
     {
         //加载地图
-        map = PoolMgr.GetInstance().GetObjAsyc("Prefabs/Level_0_to_Level_1", new Vector3(0f, 0f, 0f), Quaternion.identity);
+        map = PoolMgr.GetInstance().GetObjAsyc("Prefabs/Level_1", new Vector3(0f, 0f, 0f), Quaternion.identity);
     }
 
     /// <summary>
