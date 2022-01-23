@@ -16338,6 +16338,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'PlayerB '
       objectReference: {fileID: 0}
+    - target: {fileID: 5364199783261617832, guid: 8d760903455efe94b9f960a89e609d85,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 5364199783261617833, guid: 8d760903455efe94b9f960a89e609d85,
         type: 3}
       propertyPath: m_Sprite
@@ -16560,6 +16565,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Pillar
+      objectReference: {fileID: 0}
+    - target: {fileID: 8996188542704972652, guid: 9631684729b0afb45b15ac28851179f5,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8996188542704972652, guid: 9631684729b0afb45b15ac28851179f5,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 379526509
       objectReference: {fileID: 0}
     - target: {fileID: 8996188542704972655, guid: 9631684729b0afb45b15ac28851179f5,
         type: 3}
