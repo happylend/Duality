@@ -65,6 +65,7 @@ public class Player_ConA : MonoBehaviour
     }
     void Start()
     {
+        Preheight = 16.15f;
         input = new Player_input();
     }
 
@@ -77,7 +78,8 @@ public class Player_ConA : MonoBehaviour
         {
             CamMove = true;
             CamCount++;
-            Preheight = height;
+            Preheight += 3.5f;
+            Debug.Log(Preheight);
         }
         if (Health>=0 )
             Health -= Dam*Time.deltaTime;

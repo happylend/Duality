@@ -63,7 +63,7 @@ public class Player_ConB : MonoBehaviour
     void Start()
     {
         input = new Player_input();
-        Preheight = transform.position.y;
+        Preheight = 16.15f;
     }
 
     // Update is called once per frame
@@ -74,7 +74,7 @@ public class Player_ConB : MonoBehaviour
         if(height-Preheight>3.5f&& !CamMove)
         {
             CamMove = true;         
-            Preheight = height;          
+            Preheight +=3.5f;          
         }
 
 
