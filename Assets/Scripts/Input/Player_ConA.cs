@@ -269,11 +269,24 @@ public class Player_ConA : MonoBehaviour
             }
             else
             {
+                if(surV.y< Player_ConB.surV.y)
+                {
+                    transform.position = surV;
+                    PlayerB.transform.position = new Vector3(transform.position.x * -1, surV.y, transform.position.z);
+                    Cam.transform.position = new Vector3(CamTran.x, surV.y - 1f, CamTran.z);
+                }
+                else
+                {
+                    PlayerB.transform.position = Player_ConB.surV;
+                    transform.position = new Vector3(PlayerB.transform.position.x * -1, Player_ConB.surV.y, PlayerB.transform.position.z);
+                    Cam.transform.position = new Vector3(CamTran.x, Player_ConB.surV.y, CamTran.z);
+                }
+                    /*(
                 var surY = transform.position.y < PlayerB.transform.position.y ? transform.position.y : PlayerB.transform.position.y;
                 transform.position = new Vector3(Player_ConA.surV.x, surY, Player_ConA.surV.z);
                 PlayerB.transform.position = new Vector3(Player_ConB.surV.x, surY, Player_ConB.surV.z);
                 Cam.transform.position = new Vector3(CamTran.x, surY - 1f, CamTran.z);
-
+                    */
             }
         }
         else
