@@ -6,7 +6,7 @@ public class MoveCam : MonoBehaviour
 {
     public static bool startMove = false;
     public static bool CamMove = false;
-    private float speed = 3f;
+    private float speed = 2.9f;
     public GameObject Cam;
     public Transform ParentTran;
     public Transform[] players;
@@ -35,14 +35,15 @@ public class MoveCam : MonoBehaviour
         {   
             if(Player_ConA.CamMove && Player_ConB.CamMove)
             {
-                Cam.transform.position = Vector3.MoveTowards(Cam.transform.position, new Vector3(0, 19 + speed * Player_ConA.CamCount, -10), 8 * Time.fixedDeltaTime);
+                Cam.transform.position = Vector3.MoveTowards(Cam.transform.position, new Vector3(0, 19 + speed * Player_ConA.CamCount, -10), 6 * Time.fixedDeltaTime);
                 if(Cam.transform.position == new Vector3(0, 19+speed*Player_ConA.CamCount, -10))
                 {            
                     Player_ConA.CamMove = Player_ConB.CamMove = false;
                 }
+                /*
                 else if(Cam.transform.position == new Vector3(0, 75.2f, -10)|| Cam.transform.position == new Vector3(0, 83f, -10)||
                     Cam.transform.position == new Vector3(0, 91.5f, -10)) Player_ConA.CamMove = Player_ConB.CamMove = false;
-
+                */
                 
             }
             

@@ -8,12 +8,18 @@ public class Player_ConB : MonoBehaviour
     public Player_input input { get; set; }
     public static bool CamMove = false;
     public static float height,Preheight;
+    public static Vector3 surV = Vector3.zero;
+
     [Header("people State")]
     public float speed = 5f;
     public float Dragspeed = 1.5f;
     public float PushSpeed = 2.5f;
     public float Jumpforce = 60f;
     public float Dam = 0f;
+
+    [Header("the Other")]
+    public GameObject PlayerA;
+
     private Rigidbody2D m_Rigidbody;
     private float Health = 120f;
     private float pushTranstion = 0;
@@ -60,11 +66,13 @@ public class Player_ConB : MonoBehaviour
     {
         m_Rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+    
     }
     void Start()
     {
         input = new Player_input();
         Preheight = 16.15f;
+        surV = new Vector3(0f, 0f, 0f);
     }
 
     // Update is called once per frame
@@ -196,6 +204,17 @@ public class Player_ConB : MonoBehaviour
             IsTouch = true;
             Pillar = collision.transform.parent.gameObject;
         }
+        //如果是复活点
+        if (collision.gameObject.tag == "Resurgence")
+        {
+            Debug.Log("复活点");
+            Transform Rs = collision.transform;
+            if (Rs.GetComponent<ResurrectionPoints>().id == ResurrectionPoints.Id.Black && surV.y < Rs.position.y)
+            {
+                surV = Rs.position;
+            }
+
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -230,7 +249,35 @@ public class Player_ConB : MonoBehaviour
 
     private void GameOver()
     {
-        EventCenter.GetInstance().EventTrigger("Restart", 1);
-        //重新加载当前场景
+        Debug.Log("重启");
+        //双方碰过复活点
+        if (Player_ConA.surV != Vector3.zero && Player_ConB.surV != Vector3.zero)
+        {
+
+            var Cam = GameObject.FindWithTag("MainCamera");
+            Vector3 CamTran = Cam.transform.position;
+            //如果两个复活点相同
+            if (Player_ConA.surV.y == Player_ConB.surV.y)
+            {
+                PlayerA.transform.position = Player_ConA.surV;
+                this.transform.position = Player_ConB.surV;
+
+                Cam.transform.position = new Vector3(CamTran.x, Player_ConA.surV.y - 1f, CamTran.z);
+            }
+            else
+            {
+                var surY = transform.position.y < PlayerA.transform.position.y ? transform.position.y : PlayerA.transform.position.y;
+                transform.position = new Vector3(Player_ConA.surV.x, surY, Player_ConA.surV.z);
+                PlayerA.transform.position = new Vector3(Player_ConB.surV.x, surY, Player_ConB.surV.z);
+
+                Cam.transform.position = new Vector3(CamTran.x, surY - 1f, CamTran.z);
+
+            }
+        }
+        else
+        {
+            EventCenter.GetInstance().EventTrigger("Restart", 1);
+
+        }//重新加载当前场景
     }
 }

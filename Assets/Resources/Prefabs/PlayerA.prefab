@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5364199783261617838}
   m_Layer: 0
   m_Name: PlayerA
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -117,7 +117,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  jumpforce: 60
+  Dragspeed: 1
+  PushSpeed: 2.5
+  Jumpforce: 60
+  Dam: 1
 --- !u!50 &5364199783261617836
 Rigidbody2D:
   serializedVersion: 4

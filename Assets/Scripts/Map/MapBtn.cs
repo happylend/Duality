@@ -16,9 +16,10 @@ public class MapBtn : MonoBehaviour
     {
         
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.collider.tag == "Player")
+        if (collision.tag == "Player")
         {
             foreach (var item in door)
             {
@@ -28,9 +29,9 @@ public class MapBtn : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.collider.tag == "Player")
+        if (collision.tag == "Player")
         {
             foreach (var item in door)
             {
@@ -38,4 +39,5 @@ public class MapBtn : MonoBehaviour
             }
         }
     }
+
 }
